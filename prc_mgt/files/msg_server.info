@@ -1,0 +1,10 @@
+name=msg_server
+imove_type=1
+desc=basic configuration module
+version=v1.0.0
+id=101
+conf_path=
+conf_cmd=
+in_mem=1
+boot_flag=1
+prc_name=msg_server

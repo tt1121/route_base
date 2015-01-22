@@ -1,0 +1,10 @@
+name=mr2fc
+imove_type=1
+desc=msg recieve and forward center
+version=v1.0.0
+id=100
+conf_path=/etc/mr2fc.conf
+conf_cmd=
+in_mem=1
+boot_flag=1
+prc_name=mr2fc
