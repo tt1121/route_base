@@ -1,0 +1,13 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2007 OpenWrt.org
+set -x
+START=38
+start() {
+	#delay for wifi module load
+	sleep 1
+	/usr/sbin/rtk_txcalr -w
+}
+stop()
+{
+	echo "kill rtk_txcalr\n"
+}

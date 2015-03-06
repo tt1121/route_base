@@ -1,0 +1,68 @@
+
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=msg-lib
+PKG_VERSION:=1.0
+PKG_RELEASE:=1
+
+PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
+
+include $(INCLUDE_DIR)/package.mk
+
+
+
+define Package/msg-lib
+  SECTION:=net
+  CATEGORY:=Base system
+  TITLE:=msg-lib
+  DEPENDS:=+libpthread +libjson-c +libcrypto +librt +libopenssl +libiw +udev +libuci +libcurl
+endef
+
+
+define Package/msg-lib/description
+  msg lib auto switch
+endef
+
+define Build/Prepare
+	mkdir -p $(PKG_BUILD_DIR)
+	$(CP) ./files/* $(PKG_BUILD_DIR)/
+endef
+define Build/Compile/Default
+
+endef
+
+define Build/InstallDev
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(INSTALL_DIR) $(1)/usr/include
+	$(CP) ./files/libimove.so $(1)/usr/lib/
+	$(CP) ./files/imove_api.h $(1)/usr/include/
+#	$(CP) ./files/im_download.h $(1)/usr/include/	
+endef
+
+define Package/msg-lib/install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_DIR) $(1)/etc
+	$(INSTALL_DIR) $(1)/etc/config
+#	$(INSTALL_DIR) $(1)/usr/include
+	$(INSTALL_DIR) $(1)/etc/init.d
+#	$(INSTALL_BIN) ./files/mr2fc $(1)/usr/sbin/
+#	$(INSTALL_BIN) ./files/mr2fc.conf $(1)/etc/
+	$(INSTALL_BIN) ./files/root_pwd $(1)/etc/
+	$(INSTALL_BIN) ./files/libimove.so $(1)/usr/lib/
+	$(INSTALL_BIN) ./files/cfg $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/get_free_mount $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/get_hd $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/get_mount_point $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/get_vid_pid $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/mntd $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/rtk_pcap $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/rtk_txcalr $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/flash $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/rtk_app.init $(1)/etc/init.d/rtk_app
+	$(INSTALL_BIN) ./files/msg-lib.init $(1)/etc/init.d/msg-lib
+endef
+
+$(eval $(call BuildPackage,msg-lib))
+

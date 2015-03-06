@@ -1,0 +1,15 @@
+#!/bin/sh /etc/rc.common
+
+START=50
+
+RUN_D=/var/run/prc_mgt
+
+start()
+{
+	prc_mgt &
+}
+
+stop
+{
+	killall prc_mgt
+}
